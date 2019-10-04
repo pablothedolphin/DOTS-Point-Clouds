@@ -4,6 +4,7 @@
 
 !.gitignore
 !README.md
+!image.png
 
 # Include the /DOTS Point Clouds/ folder
 !DOTS Point Clouds/

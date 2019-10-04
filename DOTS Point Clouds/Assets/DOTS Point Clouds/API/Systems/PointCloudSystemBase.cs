@@ -35,6 +35,7 @@ namespace Unity.PointClouds
 				computeShader = Resources.Load<ComputeShader> (computeShaderName),
 				renderData = dataQuery.ToComponentDataArray<T0> (Allocator.TempJob),
 				propertyCount = propertyCount
+
 			}.WriteToRenderTexture ();
 
 			// destroy the event entities that were created this frame

@@ -12,9 +12,9 @@ public class ExamplePointCloudData : MonoBehaviour
     {
         EntityManager manager = World.Active.EntityManager;
 
-        for (int x = 0; x < 3162; x++)
+        for (int x = 0; x < 1000; x++)
         {
-            for (int z = 0; z < 3162; z++)
+            for (int z = 0; z < 1000; z++)
             {
                 Entity entity = manager.CreateEntity ();
                 manager.AddComponentData (entity, new PointPosition (new float3 (x, 0, z) / 10));

@@ -26,14 +26,14 @@ namespace Unity.PointClouds
         public static implicit operator PointVelocity (float3 data) => new PointVelocity (data);
     }
 
-    public struct PointNormal : IComponentData
+    public struct PointRotation : IComponentData
     {
         public float3 Value;
 
-        public PointNormal (float3 newValue) { Value = newValue; }
+        public PointRotation (float3 newValue) { Value = newValue; }
 
-        public static implicit operator float3 (PointNormal data) => data.Value;
-        public static implicit operator PointNormal (float3 data) => new PointNormal (data);
+        public static implicit operator float3 (PointRotation data) => data.Value;
+        public static implicit operator PointRotation (float3 data) => new PointRotation (data);
     }
 
     public struct PointColor : IComponentData

@@ -467,12 +467,21 @@ VisualEffect:
       - m_Value: {x: 1, y: 1, z: 1}
         m_Name: Scale
         m_Overridden: 1
+      - m_Value: {x: 1000, y: 1000, z: 1000}
+        m_Name: Bounds Size
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: Bounds Center
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 1000000
+        m_Name: Count
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:

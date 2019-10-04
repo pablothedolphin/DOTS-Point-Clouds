@@ -5,24 +5,21 @@ using Unity.Collections;
 
 namespace Unity.PointClouds
 {
-	public abstract class PointCloudDataRenderSystem<T> : ComponentSystem where T: struct, IComponentData
+	public class PointCloudDataWriter<T> where T: struct, IComponentData
 	{
-		protected RenderTexture renderTexture;
-		protected ComputeShader computeShader;
+		public RenderTexture renderTexture;
+		public ComputeShader computeShader;
 
-		protected NativeArray<T> renderData;
+		public NativeArray<T> renderData;
 
-		protected ComputeBuffer dataBuffer;
-		protected RenderTexture tempRenderTexture;
+		private ComputeBuffer dataBuffer;
+		private RenderTexture tempRenderTexture;
 
-        protected int propertyCount;
+		public int propertyCount;
 
-		protected override void OnUpdate ()
+		public void WriteToRenderTexture ()
 		{
             if (!ValidateRenderTexture ()) return;
-
-            EntityQuery entityQuery = EntityManager.CreateEntityQuery (typeof (T));
-            renderData = entityQuery.ToComponentDataArray<T> (Allocator.TempJob);
 
             int mapWidth = renderTexture.width;
 			int mapHeight = renderTexture.height;
@@ -66,10 +63,12 @@ namespace Unity.PointClouds
 			computeShader.SetBuffer (kernel, "DataBuffer", dataBuffer);
 			computeShader.SetTexture (kernel, "DataMap", tempRenderTexture);
 
-			computeShader.Dispatch (kernel, mapWidth / 32, mapHeight / 32, 1);
+			computeShader.Dispatch (kernel, mapWidth / 8, mapHeight / 8, 1);
+
+			GL.Flush ();
 
 			// once complete, write the results back on to the real data map file
-
+			
 			Graphics.CopyTexture (tempRenderTexture, renderTexture);
 
             renderData.Dispose ();

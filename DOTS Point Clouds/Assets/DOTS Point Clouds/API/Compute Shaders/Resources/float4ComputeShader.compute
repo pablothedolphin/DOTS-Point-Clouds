@@ -21,7 +21,7 @@ uint Hash(uint s)
 [numthreads(8, 8, 1)]
 void BakeData(uint2 id : SV_DispatchThreadID)
 {
-	uint i = Hash(id.x + id.y * 65536) % DataCount;
+	uint i = id.x + id.y * 4096;
 
 	float4 color = float4(
 		DataBuffer[i * 4],

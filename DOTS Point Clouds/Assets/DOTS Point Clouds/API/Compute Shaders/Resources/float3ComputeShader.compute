@@ -18,12 +18,10 @@ uint Hash(uint s)
     return s;
 }
 
-[numthreads(32, 32, 1)]
+[numthreads(8, 8, 1)]
 void BakeData(uint2 id : SV_DispatchThreadID)
 {
-	uint i = Hash(id.x + id.y * 65536) % DataCount;
-	//uint i = id.x + id.y * 65536;
-	//uint i = id.x + id.y * 262144‬‬;
+	uint i = id.x + id.y * 4096;
 
     float3 vector3 = float3(
 		DataBuffer[i * 3],

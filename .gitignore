@@ -1,0 +1,17 @@
+/*
+
+/*/
+
+!.gitignore
+!README.md
+
+# Include the /DOTS Point Clouds/ folder
+!DOTS Point Clouds/
+
+# Ignore everything inside project folder
+DOTS Point Clouds/*
+
+# Select which folders become included
+!DOTS Point Clouds/Assets/
+!DOTS Point Clouds/ProjectSettings/
+!DOTS Point Clouds/Packages

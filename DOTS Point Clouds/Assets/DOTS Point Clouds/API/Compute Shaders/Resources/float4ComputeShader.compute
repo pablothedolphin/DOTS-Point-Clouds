@@ -1,0 +1,34 @@
+#pragma kernel BakeData
+
+uint DataCount;
+
+StructuredBuffer<float> DataBuffer;
+
+RWTexture2D<float4> DataMap;
+
+// Hash function from H. Schechter & R. Bridson, goo.gl/RXiKaH
+uint Hash(uint s)
+{
+	s ^= 2747636419u;
+	s *= 2654435769u;
+	s ^= s >> 16;
+	s *= 2654435769u;
+	s ^= s >> 16;
+	s *= 2654435769u;
+	return s;
+}
+
+[numthreads(8, 8, 1)]
+void BakeData(uint2 id : SV_DispatchThreadID)
+{
+	uint i = Hash(id.x + id.y * 65536) % DataCount;
+
+	float4 color = float4(
+		DataBuffer[i * 4],
+		DataBuffer[i * 4 + 1],
+		DataBuffer[i * 4 + 2],
+		DataBuffer[i * 4 + 3]
+	);
+
+	DataMap[id] = color;
+}
